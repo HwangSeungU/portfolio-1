@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보안 컨설턴트/엔지니어 포트폴리오</title>
+    
+    <style>
+        /* CSS 스타일 시작 */
+        
+        /* 기본 리셋 및 폰트 설정 */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #004d40; 
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 5px;
+        }
+
+        /* 섹션 공통 스타일 */
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* 슬라이드 버튼의 기준점 */
+        }
+
+        section h2 {
+            text-align: center;
+            color: #004d40; 
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* 프로젝트 컨테이너 래퍼: 버튼과 컨테이너를 묶음 */
+        .project-wrapper {
+            position: relative;
+            overflow: hidden; 
+        }
+
+        /* 프로젝트 컨테이너: 가로 스크롤 비활성화, 내부 요소는 flex */
+        .project-container {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 20px;
+            overflow-x: hidden; /* JavaScript로 제어 */
+            padding-bottom: 15px; 
+            justify-content: flex-start;
+            scroll-behavior: smooth; /* 부드러운 스크롤 효과 */
+            padding: 0 50px; /* 버튼 공간 확보 */
+        }
+        
+        /* === 슬라이드 버튼 스타일 === */
+        .slide-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 77, 64, 0.7); /* 버튼 배경색 */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 24px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+
+        .slide-btn:hover {
+            background: #004d40;
+        }
+
+        #prev-btn {
+            left: 10px;
+        }
+
+        #next-btn {
+            right: 10px;
+        }
+        /* ========================= */
+
+
+        /* 프로젝트 카드 스타일 */
+        .project-card {
+            flex: 0 0 300px; 
+            min-width: 300px; 
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            color: #333;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 10px;
+            margin-top: 0;
+            height: auto; 
+            overflow: visible; 
+            word-break: keep-all; 
+        }
+
+        .project-description {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 15px;
+            height: 60px; 
+            overflow: hidden;
+        }
+
+        .project-tags {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .project-tags li {
+            display: inline-block;
+            background-color: #e0f2f1; 
+            color: #004d40; 
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+
+        .project-links a {
+            display: inline-block;
+            margin-right: 10px;
+            color: #004d40;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid #004d40;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .project-links a:hover {
+            background-color: #004d40;
+            color: white;
+        }
+
+        /* 보유 기술 및 도구 섹션 스타일 */
+        #skills, #tools {
+            padding: 40px 20px;
+        }
+
+        .skills-category {
+            margin-bottom: 30px;
+        }
+
+        .skills-category h3 {
+            background-color: #f0f4c3; 
+            padding: 10px;
+            border-left: 5px solid #004d40;
+            color: #333;
+            margin-top: 0;
+        }
+        
+        /* 도구 목록 스타일 */
+        #tools .tools-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        #tools .tools-list li {
+            background-color: #d1c4e9; 
+            color: #4527a0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .skills-category ul {
+            list-style: disc;
+            padding-left: 40px;
+        }
+
+        .skills-category li {
+            margin-bottom: 8px;
+        }
+
+        /* 푸터 스타일 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* 미디어 쿼리 (모바일 환경에서 버튼 크기 조정) */
+        @media (max-width: 768px) {
+             .slide-btn {
+                font-size: 20px;
+                width: 40px;
+                height: 40px;
+             }
+        }
+        /* CSS 스타일 끝 */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>안녕하세요, 황승우의 포트폴리오입니다.</h1>
+        <p>웹 서비스 개발 지식을 기반으로 한 보안 취약점 진단, 시스템/네트워크 인프라 구축 및 방어 설계 경험을 보유하고 있습니다.</p>
+    </header>
+
+    <section id="projects">
+        <h2>🛡️ 보안 및 인프라 구축 프로젝트</h2>
+        
+        <div class="project-wrapper"> 
+            <button id="prev-btn" class="slide-btn"> &lt; </button>
+            <button id="next-btn" class="slide-btn"> &gt; </button>
+            
+            <div class="project-container" id="project-container">
+                <div class="project-card">
+                    <h3>최종 팀 프로젝트: 🔐 기업 맞춤형 웹 보안 솔루션 설계 및 구축</h3>
+                    <p class="project-description">주요정보통신기반시설 문서를 통한 보안 점검을 통하여 기업의 네트워크 인프라 구축, 보안 설정 및 보안장비 설정, 웹 취약점 분석과 해결방안을 제시했습니다.</p>
+                    <ul class="project-tags">
+                        <li>네트워크 인프라 구축</li>
+                        <li>네트워크 보안 설정</li>
+                        <li>UTM 설정</li>
+                        <li>웹 취약점 분석</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://drive.google.com/drive/folders/1eNkrmqJVTWpxgArz5kYzAIQw9mtPYOh0?hl=ko" target="_blank">개인 포트폴리오</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>개인 프로젝트: 🔍 BeBox 기반 웹 취약점 진단 및 보안 강화</h3>
+                    <p class="project-description">
+                        모의 해킹 환경 BeBox를 대상으로 웹 서비스의 주요 취약점(OWASP TOP 10 포함)을 진단하고, 이에 대한 상세 보고서를 작성했습니다. 진단된 취약점을 분석하고 구체적인 방어 및 보안 강화 방안을 도출하여 시스템에 적용했습니다.
+                    </p>
+                    <ul class="project-tags">
+                        <li>웹 모의 해킹</li>
+                        <li>OWASP TOP 10 진단</li>
+                        <li>SQL Injection 방어 (U-06)</li>
+                        <li>XSS/Session Hijacking 분석 (U-15)</li>
+                        <li>Broken Authentication 대응 (U-15)</li>
+                        <li>File Upload 취약점 진단 (U-06)</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="" target="_blank">모의해킹 보고서</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>네트워크 인프라 구축 및 보안 세미 프로젝트</h3>
+                    <p class="project-description">기업 환경에 적합한 리눅스 서버 환경 설정, 보안설정 및 서비스를 구현했습니다.</p>
+                    <ul class="project-tags">
+                        <li>Linux 서버 구축 및 보안 설정</li>
+                        <li>서비스 설정 및 보안 설정</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://drive.google.com/drive/folders/1ccI4gJOlGPtxRaLhO7y3Q1eBpgJjdCKG?hl=ko" target="_blank">개인 포트폴리오</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>개발 기반 웹 서비스 구축 팀 프로젝트</h3>
+                    <p class="project-description">Java 기반 MVC2 웹 서비스 개발 시, 마이페이지 및 가게 리스트 출력, 돌봄 회원 리스트를 직접 구현했습니다.</p>
+                    <ul class="project-tags">
+                        <li>Java/JSP</li>
+                        <li>MVC2 아키텍처</li>
+                        <li>CRUD</li>
+                        <li>Oracle</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://github.com/HwangSeungU/workTogether_backend1" target="_blank">개발 GitHub</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="tools">
+        <h2>🔧 사용 가능 기술 및 도구</h2>
+        <ul class="tools-list">
+            <li>Packet Tracer</li>
+            <li>GNS3</li>
+            <li>PuTTY</li>
+            <li>Wireshark</li>
+            <li>Nmap</li>
+            <li>Hydra</li>
+            <li>Burp Suite</li>
+            <li>Kali Linux</li>
+            <li>Rocky Linux</li>
+            <li>ModSecurity</li>
+            <li>Windows Server 2016</li>
+            <li>Windows 10</li>
+            <li>Sophos (UTM/방화벽)</li>
+        </ul>
+    </section>
+
+
+    <section id="skills">
+        <h2>✅ 핵심 역량 및 기술 스택</h2>
+        
+        <div class="skills-category">
+            <h3>웹/애플리케이션 보안 진단 및 대응</h3>
+            <ul>
+                <li>**OWASP TOP 10 보안 취약점 진단 및 대응** (SQL Injection, XSS, CSRF 등의 공격 실습 및 방어)</li>
+                <li>웹 방화벽 정책 설정, 로그 분석 및 보안 패치 적용 경험</li>
+                <li>Cookie와 Session의 차이 및 이를 활용한 보안 세션 관리</li>
+                <li>Request/Response 처리 과정의 보안 유효성 검증 설계</li>
+            </ul>
+        </div>
+        
+        <div class="skills-category">
+            <h3>시스템 및 서버 보안 엔지니어링</h3>
+            <ul>
+                <li>**리눅스/Windows 서버 구축 및 보안 강화** (접근 제어, 사용자 권한 관리, 서비스 관리)</li>
+                <li>방화벽 설정, 로그 분석, 침입 탐지 시스템 구축</li>
+                <li>서버 운영체제 보안 및 시스템 관리 도구 활용 능력</li>
+            </ul>
+        </div>
+        
+        <div class="skills-category">
+            <h3>네트워크 인프라 설계 및 방어</h3>
+            <ul>
+                <li>**Cisco IOS 기반 라우팅·VLAN 구현** 및 GNS3 가상 환경 구성</li>
+                <li>NAT, DHCP, Subneting을 통한 효율적인 IP 주소 관리 및 네트워크 설계</li>
+                <li>네트워크 패킷 분석을 통한 흐름 및 위협 요소 식별 능력</li>
+            </ul>
+        </div>
+
+        <div class="skills-category">
+            <h3>개발 언어 및 데이터베이스 활용</h3>
+            <ul>
+                <li>JAVA Servlet/JSP 기반 MVC2 아키텍처 웹 애플리케이션 구현 능력</li>
+                <li>Oracle 기반 DB 설계, 기본적인 SQL (DDL, DML) 및 MyBatis를 이용한 DB 연동</li>
+                <li>JavaScript 및 jQuery를 활용한 비동기 데이터 통신 및 UI 보안 고려 사항 이해</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>📧 이메일: your_security_email@example.com</p>
+        <p>📞 연락처: 010-xxxx-xxxx</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('project-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        
+        
+        const CARD_WIDTH = 300; 
+        const GAP = 20; 
+        const SCROLL_DISTANCE = CARD_WIDTH + GAP;
+
+       
+        const cardCount = container.children.length;
+        
+        
+        const maxScrollStart = (cardCount - 1) * SCROLL_DISTANCE;
+
+        
+        nextBtn.addEventListener('click', () => {
+            
+            if (container.scrollLeft >= maxScrollStart - 5) { 
+                
+                container.scrollLeft = 0; 
+            } else {
+                
+                container.scrollLeft += SCROLL_DISTANCE;
+            }
+        });
+
+        
+        prevBtn.addEventListener('click', () => {
+            
+            if (container.scrollLeft <= 5) {
+                
+                container.scrollLeft = maxScrollStart; 
+            } else {
+                
+                container.scrollLeft -= SCROLL_DISTANCE;
+            }
+        });
+
+        
+    });
+</script>
+</body>
+</html>
