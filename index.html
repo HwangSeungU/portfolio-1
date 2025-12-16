@@ -6,6 +6,8 @@
     <title>보안 컨설턴트/엔지니어 포트폴리오</title>
     
     <style>
+        /* CSS 스타일 시작 */
+        
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -44,11 +46,104 @@
             padding-bottom: 10px;
         }
 
+        /* 프로필 카드 스타일 */
+        #profile-card {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 1000px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #ddd; 
+            border: 4px solid #004d40;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        /* 이미지 대신 텍스트를 표시하는 경우 */
+        .profile-photo span {
+            color: #555;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        /* 프로필 이미지 스타일 */
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-info h3 {
+            color: #004d40;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        
+        .profile-contact {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px 30px;
+        }
+
+        .profile-contact li {
+            font-size: 0.9em;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-contact li strong {
+            color: #333;
+            margin-right: 5px;
+        }
+
+        .profile-motto {
+            font-style: italic;
+            border-left: 3px solid #004d40;
+            padding-left: 10px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            #profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-photo {
+                margin-bottom: 10px;
+            }
+            .profile-contact {
+                justify-content: center;
+            }
+        }
+        
+        /* 프로젝트 컨테이너 래퍼 */
         .project-wrapper {
             position: relative;
             overflow: hidden; 
         }
 
+        /* 프로젝트 컨테이너 */
         .project-container {
             display: flex;
             flex-wrap: nowrap;
@@ -60,6 +155,7 @@
             padding: 0 50px; 
         }
         
+        /* 슬라이드 버튼 스타일 */
         .slide-btn {
             position: absolute;
             top: 50%;
@@ -93,6 +189,7 @@
             right: 10px;
         }
         
+        /* 프로젝트 카드 스타일 */
         .project-card {
             flex: 0 0 300px; 
             min-width: 300px; 
@@ -234,6 +331,22 @@
         <p>웹 서비스 개발 지식을 기반으로 한 보안 취약점 진단, 시스템/네트워크 인프라 구축 및 방어 설계 경험을 보유하고 있습니다.</p>
     </header>
 
+    <section id="profile-card">
+        <div class="profile-photo">
+            <img src="/portfolio/images/profile.jpg" alt="프로필 사진">
+        </div>
+        <div class="profile-info">
+            <h3>황승우 (Hwang Seung Woo)</h3>
+            <ul class="profile-contact">
+                <li><strong>📞 전화번호:</strong> 010-3610-5710</li>
+                <li><strong>📧 이메일:</strong>susj1475321@naver.com</li>
+            </ul>
+            <p class="profile-motto">
+                "끊임없이 노력으로 성장을 멈추지 않으며, 긍정적인 태도로 도전을 맞이합니다."
+            </p>
+        </div>
+    </section>
+
     <section id="projects">
         <h2>🛡️ 보안 및 인프라 구축 프로젝트</h2>
         
@@ -252,7 +365,7 @@
                         <li>웹 취약점 분석</li>
                     </ul>
                     <div class="project-links">
-                        <a href="https://drive.google.com/drive/folders/1eNkrmqJVTWpxgArz5kYzAIQw9mtPYOh0?hl=ko" target="_blank">개인 포트폴리오</a>
+                        <a href="/portfolio/docs/final_report.pdf" target="_blank">개인 포트폴리오 (PDF)</a>
                     </div>
                 </div>
 
@@ -270,7 +383,7 @@
                         <li>File Upload 취약점 진단 (U-06)</li>
                     </ul>
                     <div class="project-links">
-                        <a href="" target="_blank">모의해킹 보고서</a>
+                        <a href="/portfolio/docs/bebox_report.pdf" target="_blank">모의해킹 보고서 (PDF)</a>
                     </div>
                 </div>
 
@@ -282,7 +395,7 @@
                         <li>서비스 설정 및 보안 설정</li>
                     </ul>
                     <div class="project-links">
-                        <a href="https://drive.google.com/drive/folders/1ccI4gJOlGPtxRaLhO7y3Q1eBpgJjdCKG?hl=ko" target="_blank">개인 포트폴리오</a>
+                        <a href="/portfolio/docs/semi_project.pdf" target="_blank">개인 포트폴리오 (PDF)</a>
                     </div>
                 </div>
 
@@ -367,52 +480,51 @@
     </section>
 
     <footer>
-        <p>📧 이메일: your_security_email@example.com</p>
-        <p>📞 연락처: 010-xxxx-xxxx</p>
+        <p>📧 이메일: susj1475321@naver.com</p>
+        <p>📞 연락처: 010-3610-5710</p>
     </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('project-container');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        
-        const CARD_WIDTH = 300; 
-        const GAP = 20; 
-        const SCROLL_DISTANCE = CARD_WIDTH + GAP;
-
-        const cardCount = container.children.length;
-        
-        const maxScrollStart = (cardCount - 1) * SCROLL_DISTANCE;
-
-        nextBtn.addEventListener('click', () => {
-            const maxScrollPosition = container.scrollWidth - container.clientWidth;
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('project-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
             
-            if (container.scrollLeft >= maxScrollPosition - 5) {
-                container.style.scrollBehavior = 'auto';
-                container.scrollLeft = 0; 
-                setTimeout(() => {
-                    container.style.scrollBehavior = 'smooth';
-                }, 10); 
-            } else {
-                container.scrollLeft += SCROLL_DISTANCE;
-            }
-        });
+            const CARD_WIDTH = 300; 
+            const GAP = 20; 
+            const SCROLL_DISTANCE = CARD_WIDTH + GAP;
 
-        prevBtn.addEventListener('click', () => {
-            if (container.scrollLeft <= 5) {
-                container.style.scrollBehavior = 'auto';
-                container.scrollLeft = maxScrollStart; 
-                setTimeout(() => {
-                    container.style.scrollBehavior = 'smooth';
-                }, 10); 
-            } else {
-                container.scrollLeft -= SCROLL_DISTANCE;
-            }
-        });
+            const cardCount = container.children.length;
+            
+            const maxScrollStart = (cardCount - 1) * SCROLL_DISTANCE;
 
-        console.log("보안 포트폴리오 페이지 로드 완료. 순환 슬라이드 로직이 재개선되었습니다.");
-    });
-</script>
+            nextBtn.addEventListener('click', () => {
+                const maxScrollPosition = container.scrollWidth - container.clientWidth;
+                
+                if (container.scrollLeft >= maxScrollPosition - 5) {
+                    container.style.scrollBehavior = 'auto';
+                    container.scrollLeft = 0; 
+                    setTimeout(() => {
+                        container.style.scrollBehavior = 'smooth';
+                    }, 10); 
+                } else {
+                    container.scrollLeft += SCROLL_DISTANCE;
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (container.scrollLeft <= 5) {
+                    container.style.scrollBehavior = 'auto';
+                    container.scrollLeft = maxScrollStart; 
+                    setTimeout(() => {
+                        container.style.scrollBehavior = 'smooth';
+                    }, 10); 
+                } else {
+                    container.scrollLeft -= SCROLL_DISTANCE;
+                }
+            });
+
+        });
+    </script>
 </body>
 </html>
